@@ -1,0 +1,343 @@
+<html>
+    <head>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    </head>
+<body>
+
+
+<div class="container marginT20 marginB20">
+<div class="macendonia-wr helper-hidden" id="macedonia">
+<h2 class="Dosis  titleCorrespondencia"><span class="colorVerde-I-III Font28" id="_label">Evolución del año</span></h2>
+
+<div class="macedoniaCard"><!-- Comenta para activar mensaje final de año AÑADIR CLASE blur-->
+<div class="mask_macedonia helper-hidden"><!--  Comenta para activar mensaje final de año ELIMINAR CLASE helper-hidden--><!--************** -->
+<div><strong>Estamos trabajando para que TUS PLANES se cumplan.</strong>
+
+<p>En Caser te ofrecemos la más amplia información de tu ahorro y, para ello, actualmente estamos finalizando el cierre contable del año 2019.<br />
+En breve, podrás consultar la valoración actualizada de tus productos.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cara">
+<div><span data-decimals="2" data-speed="1500" data-symbol="€" data-to="30000" id="saldo-total">0,00 €</span> <span>Patrimonio a 31/12/2018</span>
+
+<div class="puntos">
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+
+<div class="cara">
+<p>Este importe corresponde a la suma de los saldos, a 31/12/2018, de los productos de ahorro y planes de pensiones que tienes contratados.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cara">
+<div><span data-decimals="2" data-speed="1500" data-symbol="€" id="capital-total">0,00 €</span> <span>Patrimonio actual</span>
+
+<div class="puntos">
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+
+<div class="cara">
+<p>Este importe corresponde a la suma de los saldos, a última fecha de valoración, de los productos de ahorro y planes de pensiones que tienes contratados.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cara">
+<div><span data-decimals="2" data-speed="1500" data-symbol="€" data-to="31400" id="rentabilidad-total">0,00 €</span> <span>Rentabilidad del año en curso</span>
+
+<div class="puntos">
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+
+<div class="cara">
+<p>Tu importe total de rentabilidad acumulada, en este año, para los planes de pensiones y pólizas de ahorro que tienes contratadas.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cara">
+<div><span data-decimals="2" data-speed="1500" data-symbol="%" data-to="30" id="rentabilidad-total-porcentaje">0,00 %</span> <span>Rentabilidad del año en curso</span>
+
+<div class="puntos">
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+
+<div class="cara">
+<p>Tu importe total de rentabilidad acumulada, en este año, para los planes de pensiones y pólizas de ahorro que tienes contratadas.</p>
+</div>
+</div>
+</div>
+
+<div class="helper-hidden" id="cdefectorsg">
+<div class="block_content-sinseguros">
+<div class="block_content-sinseguros--texto">HOLA 1</div>
+</div>
+</div>
+</div>
+
+<div class="helper-hidden" id="cdefectoah">
+<div class="block_content-sinseguros">
+<div class="block_content-sinseguros--texto">HOLA 2
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Efectos de la macedonia
+if (!$('html.ie').length){
+		$(".macedoniaCard .card").click(function() {
+            var index = $(".card").index(this);
+            $(".card").each(function(i) {
+                if ($(".card").index(this) != index) {
+                    $(this).removeClass("vuelta");
+                } else {
+                    $(this).toggleClass("vuelta");
+                }
+            });
+        });
+}
+		$.fn.countTo = function (options) {
+				options = options || {};
+				return $(this).each(function () {
+					// set options for current element
+					var settings = $.extend({}, $.fn.countTo.defaults, {
+						from:            $(this).data('from'),
+						to:              $(this).data('to'),
+						speed:           $(this).data('speed'),
+						refreshInterval: $(this).data('refresh-interval'),
+						decimals:        $(this).data('decimals'),
+						symbol:          $(this).data('symbol')
+					}, options);
+
+					// how many times to update the value, and how much to increment the value on each update
+					var loops = Math.ceil(settings.speed / settings.refreshInterval), increment = (settings.to - settings.from) / loops;
+
+					// references & variables that will change with each update
+					var self = this, $self = $(this), loopCount = 0, value = settings.from, data = $self.data('countTo') || {};
+					$self.data('countTo', data);
+
+					// if an existing interval can be found, clear it first
+					if (data.interval) {
+						clearInterval(data.interval);
+					}
+					data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+					// initialize the element with the starting value
+					render(value);
+
+					function updateTimer() {
+						value += increment;
+						loopCount++;
+
+						render(value);
+
+						if (typeof(settings.onUpdate) == 'function') {
+							settings.onUpdate.call(self, value);
+						}
+
+						if (loopCount >= loops) {
+							// remove the interval
+							$self.removeData('countTo');
+							clearInterval(data.interval);
+							value = settings.to;
+
+							if (typeof(settings.onComplete) == 'function') {
+								settings.onComplete.call(self, value);
+							}
+						}
+					}
+
+					function render(value) {
+						var formattedValue = settings.formatter.call(self, value, settings);
+						$self.html(formattedValue);
+					}
+				});
+		};
+
+		$.fn.countTo.defaults = {
+			from: 0,               // the number the element should start at
+			to: 0,                 // the number the element should end at
+			speed: 1000,           // how long it should take to count between the target numbers
+			refreshInterval: 100,  // how often the element should be updated
+			decimals: 0,           // the number of decimal places to show
+			formatter: formatter,  // handler for formatting the value before rendering
+			onUpdate: null,        // callback method for every time the element is updated
+			onComplete: null,       // callback method for when the element finishes updating
+			symbol: ''
+		};
+
+		function formatter(value, settings) {
+			return value.toFixed(settings.decimals) + ' ' + settings.symbol;
+		};
+
+        
+		//Carga de datos de la macedoniaCard
+		var capitalEpsv = 0;
+		var capitalPensiones = 0;
+		var capitalVidaAhorro = 0;
+		var saldoEpsv = 0;
+		var saldoPensiones = 0;
+		var saldoVidaAhorro = 0;
+		var rentabilidadEpsv = 0;
+		var rentabilidadPensiones = 0;
+		var rentabilidadVidaAhorro = 0;
+		var aportacionesTrasladosEpsv = 0;
+		var aportacionesTrasladosPensiones = 0;
+		var aportacionesTrasladosAhorro = 0;
+		var prestacionesEpsv = 0;
+		var prestacionesPensiones = 0;
+		var prestacionesAhorro = 0;
+		var maxloops =50;
+		var actualloops = 0;
+		var fechaHoy = new Date();
+		$('#fechaSaldoPGPensiones').text('31/12/' + (fechaHoy.getFullYear() - 1));		
+        
+        
+        $('#PensionesLoaded')=20000;
+        $('#AhorroLoaded')=1000;
+        $('#EpsvsLoaded')= 6546131;
+        
+		Liferay.on('loadMacedonia', function(event) {
+			if(document.macedoniaLoaded == undefined && $('#PensionesLoaded') && $('#PensionesLoaded').val()=='true' && $('#AhorroLoaded') && $('#AhorroLoaded').val()=='true' && $('#EpsvsLoaded') && $('#EpsvsLoaded').val()=='true'){			
+				actualizaElementos();
+			}	
+		});	
+				
+		function actualizaElementos() {debugger;
+			if  ( $("#TotalCalculoEpsv").length) {
+				capitalEpsv = $('#TotalCalculoEpsv').val();
+				capitalEpsv = parseFloat(capitalEpsv.replace(/\./g,"").replace(/\,/g,"."));
+				if  ( $("#TotalCalculoEpsv3112").length ) {
+					saldoEpsv = $('#TotalCalculoEpsv3112').val();
+					saldoEpsv = parseFloat(saldoEpsv.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#TotalAportacionesEpsv3112").length ) {
+					aportacionesTrasladosEpsv = $('#TotalAportacionesEpsv3112').val();
+					aportacionesTrasladosEpsv = parseFloat(aportacionesTrasladosEpsv.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#TotalPrestacionesEpsv").length ) {
+					prestacionesEpsv = $('#TotalPrestacionesEpsv').val();
+					prestacionesEpsv = parseFloat(prestacionesEpsv.replace(/\./g,"").replace(/\,/g,"."));
+				}
+			}
+		
+			if  ( $("#TotalCalculoPensiones").length) {
+				capitalPensiones = $('#TotalCalculoPensiones').html();
+				capitalPensiones = parseFloat(capitalPensiones.replace(/\./g,"").replace(/\,/g,"."));
+				if  ( $("#TotalCalculoPensiones3112").length ) {
+					saldoPensiones = $('#TotalCalculoPensiones3112').val();
+					saldoPensiones = parseFloat(saldoPensiones.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#TotalAportacionesPensiones3112").length ) {
+					aportacionesTrasladosPensiones = $('#TotalAportacionesPensiones3112').val();
+					aportacionesTrasladosPensiones = parseFloat(aportacionesTrasladosPensiones.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#TotalPrestacionesPensiones").length ) {
+					prestacionesPensiones = $('#TotalPrestacionesPensiones').val();
+					prestacionesPensiones = parseFloat(prestacionesPensiones.replace(/\./g,"").replace(/\,/g,"."));
+				}
+			}
+			if  ( $("#TotalCalculoAhorro").length) {
+				capitalVidaAhorro = $('#TotalCalculoAhorro').val();
+				capitalVidaAhorro = parseFloat(capitalVidaAhorro.replace(/\./g,"").replace(/\,/g,"."));
+				if  ( $("#totalSaldoAnioAnteriorAhorro").length ) {
+					saldoVidaAhorro = $('#totalSaldoAnioAnteriorAhorro').val();
+					saldoVidaAhorro = parseFloat(saldoVidaAhorro.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#totalRentabilidadAhorro").length ) {
+					rentabilidadVidaAhorro = $('#totalRentabilidadAhorro').val();
+					rentabilidadVidaAhorro = parseFloat(rentabilidadVidaAhorro.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#totalAportacionesTrasladosAhorro").length ) {
+					aportacionesTrasladosAhorro = $('#totalAportacionesTrasladosAhorro').val();
+					aportacionesTrasladosAhorro = parseFloat(aportacionesTrasladosAhorro.replace(/\./g,"").replace(/\,/g,"."));
+				}
+				if  ( $("#totalSalidasAnioEnCursoAhorro").length ) {
+					prestacionesAhorro = $('#totalSalidasAnioEnCursoAhorro').val();
+					prestacionesAhorro = parseFloat(prestacionesAhorro.replace(/\./g,"").replace(/\,/g,"."));
+				}
+			}
+
+			var totalCapital = capitalEpsv + capitalPensiones + capitalVidaAhorro;
+			var totalSaldo = saldoEpsv + saldoPensiones + saldoVidaAhorro;
+
+			rentabilidadEpsv = ((capitalEpsv - saldoEpsv) - aportacionesTrasladosEpsv) + prestacionesEpsv;
+			
+			rentabilidadPensiones = ((capitalPensiones - saldoPensiones) - aportacionesTrasladosPensiones) + prestacionesPensiones;
+			var totalRentabilidad = rentabilidadEpsv + rentabilidadPensiones + rentabilidadVidaAhorro;
+
+			var totalRentabilidadPorcentaje = 0
+			if(totalRentabilidad != 0){
+				var totalAportacionesTraslados = aportacionesTrasladosEpsv + aportacionesTrasladosPensiones + aportacionesTrasladosAhorro;
+				var totalPrestaciones = prestacionesEpsv + prestacionesPensiones + prestacionesAhorro;
+				if((totalSaldo + totalAportacionesTraslados) != 0){
+					totalRentabilidadPorcentaje = (totalRentabilidad / (totalSaldo + totalAportacionesTraslados))*100;
+					totalRentabilidadPorcentaje = totalRentabilidadPorcentaje < 0 ?  Math.ceil(totalRentabilidadPorcentaje*100)/100.00 : Math.floor(totalRentabilidadPorcentaje*100)/100.00;
+				}
+			}
+			var optionsDefault = {
+				formatter: function (value, options) {
+					var formateado = value.toFixed(options.decimals);
+					var number = formateado.toString().split('.');
+					number[0] = number[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+					return number[0] + ',' + number[1] + ' ' + options.symbol;
+				}
+			};
+			if (totalCapital !== 0 || totalSaldo !== 0 || totalRentabilidad !== 0 || totalRentabilidadPorcentaje !== 0) {
+				$('#cdefectoah').addClass('helper-hidden');
+				$('#cdefectorsg').addClass('helper-hidden');
+				$('#macedonia').removeClass('helper-hidden');
+				$('#macedonia .card').css('visibility','visible').addClass('zoomIn animated');
+							
+				var optionsCapitalTotal = { to: totalCapital };
+				var optionsSaldoTotal = { to: totalSaldo };
+				var optionsRentabilidad = { to: totalRentabilidad };
+				var optionsRentabilidadPorcentaje = { to: totalRentabilidadPorcentaje };
+				optionsCapitalTotal = $.extend({}, optionsDefault || {}, optionsCapitalTotal || {});
+				optionsSaldoTotal = $.extend({}, optionsDefault || {}, optionsSaldoTotal || {});
+				optionsRentabilidad = $.extend({}, optionsDefault || {}, optionsRentabilidad || {});
+				optionsRentabilidadPorcentaje = $.extend({}, optionsDefault || {}, optionsRentabilidadPorcentaje || {});
+				
+				$('#macedonia #capital-total').countTo(optionsCapitalTotal);
+				$('#macedonia #saldo-total').countTo(optionsSaldoTotal);
+				$('#macedonia #rentabilidad-total').countTo(optionsRentabilidad);
+				$('#macedonia #rentabilidad-total-porcentaje').countTo(optionsRentabilidadPorcentaje);
+
+				document.macedoniaLoaded = true;
+			}else
+							   {
+								   if ($('#DIV_S_SEGUROS_VIDA').length)
+								   {
+	   								    $('#cdefectorsg').removeClass('helper-hidden');
+	   								    $('#cdefectoah').addClass('helper-hidden');;
+		                                $('#macedonia').addClass('helper-hidden');;
+								   }
+								   else
+								   {
+									 $('#cdefectorsg').addClass('helper-hidden');;
+								    $('#cdefectoah').removeClass('helper-hidden');
+                                    $('#macedonia').addClass('helper-hidden');;
+								   }
+							   }
+		};
+    });
+</script>
+<style type="text/css">.macedoniaCard .card::before, .macedoniaCard .card::after {background: url(/documents/20182/11887509/dotted-vertical.png) repeat-y; top: 0;}
+</style>
+
+
+</body>
+
+</html>
